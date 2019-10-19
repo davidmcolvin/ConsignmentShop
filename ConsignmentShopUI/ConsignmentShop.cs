@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ConsignmentShopLibrary.EnumUtility.ConsignmentShopLibraryEnums;
 
 namespace ConsignmentShopUI
 {
@@ -25,7 +26,7 @@ namespace ConsignmentShopUI
       InitializeComponent();
       SetupData();
 
-      itemsBinding.DataSource = store.Items.Where( x => x.Sold == false).ToList();
+      itemsBinding.DataSource = store.Items.Where( x => x.Status == ItemStatus.Available).ToList();
       itemsListbox.DataSource = itemsBinding;
 
       itemsListbox.DisplayMember = "Display";
@@ -89,12 +90,18 @@ namespace ConsignmentShopUI
     {
       // Figure out what is selected from the items list
       // Copy that item to the shopping cart
-      // Do we remove the item from the items list? - no
-      Item selectedItem = (Item)itemsListbox.SelectedItem;
+      if (itemsListbox.Items.Count > 0)
+      {
+        Item selectedItem = (Item)itemsListbox.SelectedItem;
+        selectedItem.Status = ItemStatus.Pending;
 
-      shoppingCartData.Add(selectedItem);
+        shoppingCartData.Add(selectedItem);
 
-      cartBinding.ResetBindings(false);
+        itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
+        itemsBinding.ResetBindings(false);
+
+        cartBinding.ResetBindings(false);
+      }
     }
 
     private void makePurchase_Click(object sender, EventArgs e)
@@ -104,14 +111,14 @@ namespace ConsignmentShopUI
 
       foreach ( Item item in shoppingCartData )
       {
-        item.Sold = true;
-        item.Owner.PaymentDue += (decimal)item.Owner.Commission * item.Price;
-        storeProfit += ( decimal ) (1 - item.Owner.Commission ) * item.Price;
+        item.Status = ItemStatus.Sold;
+        item.Owner.PaymentDue += Math.Round( (decimal)item.Owner.Commission * item.Price, 2);
+        storeProfit += Math.Round((decimal)(1 - item.Owner.Commission) * item.Price, 2);
       }
 
       shoppingCartData.Clear();
 
-      itemsBinding.DataSource = store.Items.Where(x => x.Sold == false).ToList();
+      itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
 
       cartBinding.ResetBindings(false);
       itemsBinding.ResetBindings(false);
