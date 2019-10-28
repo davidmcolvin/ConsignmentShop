@@ -16,9 +16,9 @@ namespace ConsignmentShopUI
   {
     private Store store = new Store();
     private List<Item> shoppingCartData = new List<Item>();
-    BindingSource itemsBinding = new BindingSource();
-    BindingSource cartBinding = new BindingSource();
-    BindingSource vendorsBinding = new BindingSource();
+    //BindingSource itemsBinding = new BindingSource();
+    //BindingSource cartBinding = new BindingSource();
+    //BindingSource vendorsBinding = new BindingSource();
     private decimal storeProfit = 0;
 
     public ConsignmentShop()
@@ -26,20 +26,26 @@ namespace ConsignmentShopUI
       InitializeComponent();
       SetupData();
 
-      itemsBinding.DataSource = store.Items.Where( x => x.Status == ItemStatus.Available).ToList();
-      itemsListbox.DataSource = itemsBinding;
+      /*itemsBinding.DataSource = store.Items.Where( x => x.Status == ItemStatus.Available).ToList();*/
+      //itemsListbox.DataSource = itemsBinding;
+      itemsListbox.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
 
       itemsListbox.DisplayMember = "Display";
       itemsListbox.ValueMember = "Display";
 
-      cartBinding.DataSource = shoppingCartData;
-      shoppingCartListbox.DataSource = cartBinding;
+      //cartBinding.DataSource = shoppingCartData;
+      //shoppingCartListbox.DataSource = cartBinding;
+
+     
+      shoppingCartListbox.DataSource = shoppingCartData;
 
       shoppingCartListbox.DisplayMember = "Display";
       shoppingCartListbox.ValueMember = "Display";
 
-      vendorsBinding.DataSource = store.Vendors;
-      vendorListbox.DataSource = vendorsBinding;
+      //vendorsBinding.DataSource = store.Vendors;
+      //vendorListbox.DataSource = vendorsBinding;
+
+      vendorListbox.DataSource = store.Vendors;
 
       vendorListbox.DisplayMember = "Display";
       vendorListbox.ValueMember = "Display";
@@ -97,10 +103,14 @@ namespace ConsignmentShopUI
 
         shoppingCartData.Add(selectedItem);
 
-        itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
-        itemsBinding.ResetBindings(false);
+        shoppingCartListbox.DataSource = shoppingCartData.ToList();
 
-        cartBinding.ResetBindings(false);
+        //itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
+        //itemsBinding.ResetBindings(false);
+
+        itemsListbox.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
+
+        //cartBinding.ResetBindings(false);
       }
     }
 
@@ -118,12 +128,17 @@ namespace ConsignmentShopUI
 
       shoppingCartData.Clear();
 
-      itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
+      shoppingCartListbox.DataSource = shoppingCartData.ToList();
 
-      cartBinding.ResetBindings(false);
-      itemsBinding.ResetBindings(false);
-      vendorsBinding.ResetBindings(false);
+      //itemsListBox
+
+      //itemsBinding.DataSource = store.Items.Where(x => x.Status == ItemStatus.Available).ToList();
+
+      //cartBinding.ResetBindings(false);
+      //itemsBinding.ResetBindings(false);
+      //vendorsBinding.ResetBindings(false);
       storeProfitValue.Text = string.Format("${0}", storeProfit);
+      vendorListbox.DataSource = store.Vendors.ToList();
     }
   }
 }
