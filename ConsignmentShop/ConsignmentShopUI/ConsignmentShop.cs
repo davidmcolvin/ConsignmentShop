@@ -6,5 +6,10 @@ namespace ConsignmentShopUI
     {
       InitializeComponent();
     }
+
+    private void addToCartButton_Click(object sender, EventArgs e)
+    {
+
+    }
   }
 }
