@@ -12,6 +12,16 @@ namespace ConsignmentShopLibrary
     public string LastName { get; set; }
     public double Commission { get; set; }
 
+    public override string ToString()
+    {
+      return FirstName + " " + LastName;
+    }
+
+    public Vendor()
+    {
+      Commission = .5;
+    }
+
   }
 }
   
