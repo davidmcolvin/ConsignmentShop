@@ -5,11 +5,26 @@ namespace ConsignmentShopUI
   public partial class ConsignmentShop : Form
   {
     private Store store = new Store();
+    private List<Item> shoppingCartData = new List<Item>();
+    BindingSource itemsBinding = new BindingSource();
+    BindingSource cartBinding = new BindingSource();
 
     public ConsignmentShop()
     {
       InitializeComponent();
       SetupData();
+
+      itemsBinding.DataSource = store.Items;
+      itemsListBox.DataSource = itemsBinding;
+
+      itemsListBox.DisplayMember = "Display";
+      itemsListBox.ValueMember = "Display";
+
+      cartBinding.DataSource = shoppingCartData;
+      shoppingCartListBox.DataSource = cartBinding;
+
+      shoppingCartListBox.DisplayMember = "Display";
+      shoppingCartListBox.ValueMember = "Display";
     }
 
     private void SetupData()
@@ -54,7 +69,11 @@ namespace ConsignmentShopUI
 
     private void addToCartButton_Click(object sender, EventArgs e)
     {
+      Item selectedItem = (Item)itemsListBox.SelectedItem;
 
+      shoppingCartData.Add(selectedItem);
+
+      cartBinding.ResetBindings(false);
     }
   }
 }
