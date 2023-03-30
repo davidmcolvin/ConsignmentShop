@@ -11,10 +11,15 @@ namespace ConsignmentShopLibrary
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public double Commission { get; set; }
+    public decimal PaymentDue { get; set; }
 
-    public override string ToString()
+    public string Display
     {
-      return FirstName + " " + LastName;
+
+      get
+      {
+        return string.Format("{0} ${1} - {2}", FirstName, LastName, PaymentDue);
+      }
     }
 
     public Vendor()

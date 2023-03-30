@@ -35,6 +35,10 @@
       this.shoppingCartListBoxLabel = new System.Windows.Forms.Label();
       this.shoppingCartListBox = new System.Windows.Forms.ListBox();
       this.makePurchaseButton = new System.Windows.Forms.Button();
+      this.vendorListBoxLabel = new System.Windows.Forms.Label();
+      this.vendorListBox = new System.Windows.Forms.ListBox();
+      this.storeProfitLabel = new System.Windows.Forms.Label();
+      this.storeProfitValue = new System.Windows.Forms.Label();
       this.SuspendLayout();
       // 
       // headerText
@@ -105,12 +109,56 @@
       this.makePurchaseButton.Text = "Make Purchase";
       this.makePurchaseButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       this.makePurchaseButton.UseVisualStyleBackColor = true;
+      this.makePurchaseButton.Click += new System.EventHandler(this.makePurchaseButton_Click);
+      // 
+      // vendorListBoxLabel
+      // 
+      this.vendorListBoxLabel.AutoSize = true;
+      this.vendorListBoxLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.vendorListBoxLabel.Location = new System.Drawing.Point(61, 624);
+      this.vendorListBoxLabel.Name = "vendorListBoxLabel";
+      this.vendorListBoxLabel.Size = new System.Drawing.Size(115, 24);
+      this.vendorListBoxLabel.TabIndex = 8;
+      this.vendorListBoxLabel.Text = "Vendors";
+      // 
+      // vendorListBox
+      // 
+      this.vendorListBox.FormattingEnabled = true;
+      this.vendorListBox.ItemHeight = 24;
+      this.vendorListBox.Location = new System.Drawing.Point(61, 651);
+      this.vendorListBox.Name = "vendorListBox";
+      this.vendorListBox.Size = new System.Drawing.Size(502, 364);
+      this.vendorListBox.TabIndex = 7;
+      // 
+      // storeProfitLabel
+      // 
+      this.storeProfitLabel.AutoSize = true;
+      this.storeProfitLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.storeProfitLabel.Location = new System.Drawing.Point(821, 624);
+      this.storeProfitLabel.Name = "storeProfitLabel";
+      this.storeProfitLabel.Size = new System.Drawing.Size(205, 24);
+      this.storeProfitLabel.TabIndex = 10;
+      this.storeProfitLabel.Text = "Store Profit:";
+      // 
+      // storeProfitValue
+      // 
+      this.storeProfitValue.AutoSize = true;
+      this.storeProfitValue.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.storeProfitValue.Location = new System.Drawing.Point(1051, 624);
+      this.storeProfitValue.Name = "storeProfitValue";
+      this.storeProfitValue.Size = new System.Drawing.Size(85, 24);
+      this.storeProfitValue.TabIndex = 11;
+      this.storeProfitValue.Text = "$0.00";
       // 
       // ConsignmentShop
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 24F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1390, 647);
+      this.ClientSize = new System.Drawing.Size(1390, 1027);
+      this.Controls.Add(this.storeProfitValue);
+      this.Controls.Add(this.storeProfitLabel);
+      this.Controls.Add(this.vendorListBoxLabel);
+      this.Controls.Add(this.vendorListBox);
       this.Controls.Add(this.makePurchaseButton);
       this.Controls.Add(this.shoppingCartListBoxLabel);
       this.Controls.Add(this.shoppingCartListBox);
@@ -136,5 +184,9 @@
     private Label shoppingCartListBoxLabel;
     private ListBox shoppingCartListBox;
     private Button makePurchaseButton;
+    private Label vendorListBoxLabel;
+    private ListBox vendorListBox;
+    private Label storeProfitLabel;
+    private Label storeProfitValue;
   }
 }
